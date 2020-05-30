@@ -34,8 +34,8 @@ except ImportError:
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 http_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect'
-key = "Wh-7LFCphhSSqkwbuMAPrDEcXRass7un"
-secret = "qaoSkyLnpHVdBwhHWuaQGRnCavIqqhRS"
+key = "g06BZoz_VFEJxvzaLPTlQI-ZsbhCbRbU"
+secret = "EHoHJiGyJn-IoeHNBMGNlUFBKhoLmyci"
 filepath = r"C:\Temp\1106767324818755585.jpg"
 #image_url =r'https://pbs.twimg.com/ext_tw_video_thumb/1110391114991714305/pu/img/VN5DdIA3_jYhvxOw.jpg'
 all_files = glob.glob(r'E:\Tweets\NoGEO\t2\*.jpg')
@@ -187,7 +187,7 @@ def face2csv(filepath, face):
 
 
 def getFace(filepath, isDrawDox=True):
-    isDrawBox = True
+    isDrawBox = isDrawDox
     image = Image.open(filepath)
     # if image.size[0] < minimum_size or image.size[1] < minimum_size:
     #     print("Face size less than {} size. ".format(minimum_area))
@@ -212,8 +212,7 @@ def getFace(filepath, isDrawDox=True):
     data.append('1')
     data.append('--%s' % boundary)
     data.append('Content-Disposition: form-data; name="%s"\r\n' % 'return_attributes')
-    data.append(
-        "gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus")
+    data.append("gender,smiling,age,emotion,ethnicity,beauty,mouthstatus,skinstatus")
     data.append('--%s--\r\n' % boundary)
 
     for i, d in enumerate(data):
