@@ -9,9 +9,9 @@ dbms = mydatabase.MyDatabase(mydatabase.SQLITE, dbname='mydb.sqlite')
 def findFace(filenames):
 # Load the jpg file into a numpy array
 
-    all_data = []
     for file in filenames:
         data = []
+        all_data = []
         image = face_recognition.load_image_file(file)
         face_locations = face_recognition.face_locations(image)
         # print("I found {} face(s) in this photograph.".format(len(face_locations)))
@@ -22,7 +22,7 @@ def findFace(filenames):
         # for face_location in face_locations:
         #     top, right, bottom, left = face_location
         #     print("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
-    dbms.insertmany_sqlite3("imagelist","imagename,imagepath,faceCount",all_data)
+        dbms.insertmany_sqlite3("imagelist","imagename,imagepath,faceCount",all_data)
     print("--------- completed")
     # You can access the actual face itself like this:
     #     face_image = image[top:bottom, left:right]

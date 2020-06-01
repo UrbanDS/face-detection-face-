@@ -1,0 +1,8 @@
+// ----- update image path in face attribute
+update faceAttributes set imagepath = (select imagepath from imagelist where image_id = id)
+
+// ----- compare image attribte and imagelist tables adn get difference ids and the update different id to large
+update imagelist set is_processed='large' where  id in (select id from imagelist where id not in (select DISTINCT image_id from faceAttributes) )
+
+// ------- update is processed to processed status except large images
+update imagelist set is_processed='processed'  where is_processed='new'

@@ -136,8 +136,8 @@ def faceSQLformat(foreignkey,faceAttri):
 	return f_values
 
 
-f_from = 1001
-f_to = 3635
+f_from = 30001
+f_to = 40261
 getFaceAttributes(f_from,f_to)
 
 
