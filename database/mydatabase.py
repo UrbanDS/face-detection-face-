@@ -72,6 +72,47 @@ class MyDatabase:
         except Exception as e:
             print("Error occurred during Table creation!")
             print(e)
+    def create_db_table_name(self,name):
+        metadata = MetaData()
+
+        faceAttributes = Table(name, metadata,
+                        Column('id', Integer, primary_key=True),
+                        Column('image_path', string),
+                        Column('gender', String),
+                        Column('age', Integer),
+                        Column('smile_value', Float),
+                        Column('smile_threshold', Float),
+                        Column('emotion_anger', Float),
+                        Column('emotion_disgust', Float),
+                        Column('emotion_fear', Float),
+                        Column('emotion_happiness', Float),
+                        Column('emotion_neutral', Float),
+                        Column('emotion_sadness', Float),
+                        Column('emotion_surprise', Float),
+                        Column('ethnicity', String),
+                        Column('beauty_male_score', Float),
+                        Column('beauty_female_score', Float),
+                        Column('mouthstatus_surgical_mask_or_respirator', Float),
+                        Column('mouthstatus_other_occlusion', Float),
+                        Column('mouthstatus_close', Float),
+                        Column('mouthstatus_open', Float),
+                        Column('skinstatus_health', Float),
+                        Column('skinstatus_stain', Float),
+                        Column('skinstatus_dark_circle', Float),
+                        Column('skinstatus_acne', Float),
+                        Column('face_rectangle_top', Integer),
+                        Column('face_rectangle_left', Integer),
+                        Column('face_rectangle_width', Integer),
+                        Column('face_rectangle_height', Integer),
+                        Column('status', String),
+                        Column('time_stamp', String)
+                )
+        try:
+            metadata.create_all(self.db_engine)
+            print("Tables created")
+        except Exception as e:
+            print("Error occurred during Table creation!")
+            print(e)
 
     # Insert, Update, Delete
     def execute_query(self, query=''):
@@ -121,6 +162,19 @@ class MyDatabase:
                 print(e)
             else:
                 data = result
+                # for row in result:
+                #     # print(row)  # print(row[0], row[1], row[2])
+                #     data.append(row)
+                result.close()
+                return data
+    def get_count_result(self, query):
+        with self.db_engine.connect() as connection:
+            try:
+                result = connection.execute(query)
+            except Exception as e:
+                print(e)
+            else:
+                data = result.fetchall()[0][0]
                 # for row in result:
                 #     # print(row)  # print(row[0], row[1], row[2])
                 #     data.append(row)
